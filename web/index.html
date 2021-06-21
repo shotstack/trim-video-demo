@@ -41,7 +41,7 @@
                 <div class="col-5">
                     <form class="jumbotron" method="post">
                         <div class="form-group video-group">
-                            <label><b>Base video</b></label>
+                            <label><b>Source Video</b></label>
                             <small class="form-text text-muted float-right"
                                 >Max file size: 250MB</small
                             >
@@ -101,7 +101,35 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="form-group" id="title-group">
+
+                        <div class="row">
+                          <div class="col">
+                            <label><b>Trimmed Video</b></label>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div style="width: 100%; background-color: #cecece; border-radius: 0.25rem;">
+                                    <div style="
+                                    background-color: #25d3d0aa; width: 45%; margin-left: 10%; height: 40px;
+                                    text-align: center;
+                                    vertical-align: middle;
+                                    line-height: 40px;
+                                    border-radius: 0.25rem;">
+                                    <small>12 sec</small>
+                                   </div>
+                                </div>
+                            </div>
+                      </div>
+                      <div class="row mb-2">
+                          <div class="col">
+                              <small class="text-muted">0 sec</small>
+                              <small class="text-muted float-right">30 sec</small>
+                          </div>
+                      </div>
+
+                        
+                        <div class="form-group" id="title-group" style="display: none;">
                             <label for="clip-length">
                                 Original duration
                                 <small class="form-text text-muted float-right"
@@ -125,7 +153,7 @@
                             />
                         </div>
 
-                        <div class="form-group" id="title-group">
+                        <div class="form-group" id="title-group" style="display: none;">
                             <label for="output-length">
                                 Output duration
                                 <small class="form-text text-muted float-right"
