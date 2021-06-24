@@ -53,7 +53,8 @@
                                     >
                                         <span
                                             class="
-                                                spinner-border spinner-border-sm mb-1
+                                                spinner-border spinner-border-sm
+                                                mb-1
                                                 d-none
                                                 loading-image
                                             "
@@ -103,23 +104,36 @@
                         </div>
 
                         <div class="row">
-                          <div class="col">
-                            <label><b>Trimmed Video</b></label>
-                            <small class="form-text text-muted float-right"
-                                >Max length: 2 minutes</small
-                            >
-                          </div>
+                            <div class="col">
+                                <label><b>Trimmed Video</b></label>
+                                <small class="form-text text-muted float-right"
+                                    >Max length: 2 minutes</small
+                                >
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div style="width: 100%; background-color: #cecece; border-radius: 0.25rem;">
-                                    <div id="trim-length" style="
-                                        background-color: #25d3d0aa; width: 0%; margin-left: 0%; height: 40px;
-                                        text-align: center;
-                                        vertical-align: middle;
-                                        line-height: 40px;
-                                        border-radius: 0.25rem;">
-                                        <small id="trim-length-value">0</small>
+                                <div
+                                    style="
+                                        width: 100%;
+                                        background-color: #cecece;
+                                        border-radius: 0.25rem;
+                                    "
+                                >
+                                    <div
+                                        id="trim-length"
+                                        style="
+                                            background-color: #25d3d0aa;
+                                            width: 0%;
+                                            margin-left: 0%;
+                                            height: 40px;
+                                            text-align: center;
+                                            vertical-align: middle;
+                                            line-height: 40px;
+                                            border-radius: 0.25rem;
+                                        "
+                                    >
+                                        <small id="trim-length-value"></small>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +141,9 @@
                         <div class="row mb-2">
                             <div class="col">
                                 <small class="text-muted">0 sec</small>
-                                <small id="source-length-value" class="text-muted float-right">120 sec</small>
+                                <small id="source-length-value" class="text-muted float-right"
+                                    >120 sec</small
+                                >
                             </div>
                         </div>
 
@@ -145,11 +161,10 @@
                                         type="number"
                                         min="0"
                                         max="119"
-                                        step="1"
+                                        step="0.1"
                                         pattern="[0-1]"
-                                        oninvalid="setCustomValidity('Only values between 0 and 119 are allowed')"
-                                        oninput="setCustomValidity('')"
                                         class="form-control"
+                                        oninput="setCustomValidity('')"
                                         id="start"
                                         value="0"
                                         maxlength="3"
@@ -170,11 +185,10 @@
                                         type="number"
                                         min="1"
                                         max="120"
-                                        step="1"
+                                        step="0.1"
                                         pattern="[0-1]"
-                                        oninvalid="setCustomValidity('Only values between 0 and 120 are allowed')"
-                                        oninput="setCustomValidity('')"
                                         class="form-control"
+                                        oninput="setCustomValidity('')"
                                         id="end"
                                         value="0"
                                         maxlength="3"

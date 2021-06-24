@@ -167,7 +167,7 @@ function resetVideo() {
  */
 function submitVideoEdit() {
     updateStatus('submitted');
-
+    $('#submit-video').prop('disabled', true);
     var formData = {
         start: $('#start').val(),
         end: $('#end').val(),
@@ -354,19 +354,18 @@ function setVideoDurationFromFile(url) {
         var metadata = data.response.metadata;
         var duration = Math.round(metadata.format.duration * 10) / 10;
 
-        if (duration < maxVideoDuration) {
+        if (duration < 120) {
             maxVideoDuration = duration;
         }
 
         $sourceLengthValueField.text(`${maxVideoDuration} sec`);
-        calculateTrimLength();
         $endField.val(maxVideoDuration);
         $startField.prop('disabled', false);
         $endField.prop('disabled', false);
-        $endField.prop('max', Math.trunc(maxVideoDuration));
+        $endField.prop('max', maxVideoDuration);
+        calculateTrimLength();
     }).fail(function () {
         maxVideoDuration = 120;
-        $clipLengthField.prop('max', maxVideoDuration);
     });
 }
 
@@ -379,9 +378,12 @@ function calculateTrimLength() {
     var $trimLengthField = $('#trim-length');
     var startFieldValue = $('#start')[0].value;
     var endFieldValue = $('#end')[0].value;
-    var trimLength = (endFieldValue > 0) ? (endFieldValue-startFieldValue) : (maxVideoDuration - startFieldValue);
-    $trimLengthValueField.text((trimLength>1) ? `${trimLength} sec`: trimLength);
-    $trimLengthField.css({width: `${trimLength*100/maxVideoDuration}%`, marginLeft: `${startFieldValue*100/maxVideoDuration}%`});
+    var trimLength = endFieldValue - startFieldValue;
+    $trimLengthValueField.text(trimLength > 1 ? `${trimLength.toFixed(1)} sec` : trimLength);
+    $trimLengthField.css({
+        width: `${(trimLength * 100) / maxVideoDuration}%`,
+        marginLeft: `${(startFieldValue * 100) / maxVideoDuration}%`,
+    });
 }
 
 /**
@@ -536,15 +538,29 @@ $(document).ready(function () {
 
     /** Start/end change events */
     $('#start').change(function (event) {
-        var newValue = parseInt(event.target.value);
+        var newValue = Number(event.target.value);
+        var endFieldValue = $('#end')[0].value;
+        if (newValue > endFieldValue) {
+            $('#start').val((Number(endFieldValue) - 1).toFixed(1));
+        }
+        if (newValue < 0) {
+            $('#start').val(0);
+        }
         calculateTrimLength();
         $('#end').prop('min', newValue + 1);
     });
 
     $('#end').change(function (event) {
-        var newValue = parseInt(event.target.value);
+        var newValue = Number(event.target.value);
+        var startFieldValue = $('#start')[0].value;
+        if (newValue > maxVideoDuration) {
+            $('#end').val(maxVideoDuration);
+        }
+        if (newValue < startFieldValue) {
+            $('#end').val((Number(startFieldValue) + 1).toFixed(1));
+        }
         calculateTrimLength();
-        $('#start').prop('max', parseInt(newValue - 1));
+        $('#start').prop('max', newValue - 1);
     });
 
     /** Video URL field change event */
