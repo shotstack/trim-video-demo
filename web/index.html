@@ -41,7 +41,7 @@
                 <div class="col-5">
                     <form class="jumbotron" method="post">
                         <div class="form-group video-group">
-                            <label><b>Base video</b></label>
+                            <label><b>Source video</b></label>
                             <small class="form-text text-muted float-right"
                                 >Max file size: 250MB</small
                             >
@@ -53,7 +53,7 @@
                                     >
                                         <span
                                             class="
-                                                spinner-border spinner-border-sm
+                                                spinner-border spinner-border-sm mb-1
                                                 d-none
                                                 loading-image
                                             "
@@ -101,55 +101,34 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="form-group" id="title-group">
-                            <label for="clip-length">
-                                Original duration
-                                <small class="form-text text-muted float-right"
-                                    >&nbsp (seconds)</small
-                                >
-                            </label>
-                            <input
-                                name="clip-length"
-                                type="number"
-                                min="1"
-                                max="120"
-                                step="1"
-                                pattern="[0-1]"
-                                oninvalid="setCustomValidity('Only values between 1 and 120 are allowed')"
-                                oninput="setCustomValidity('')"
-                                class="form-control advanced"
-                                id="clip-length"
-                                value="0"
-                                maxlength="3"
-                                disabled="disabled"
-                            />
-                        </div>
 
-                        <div class="form-group" id="title-group">
-                            <label for="output-length">
-                                Output duration
-                                <small class="form-text text-muted float-right"
-                                    >&nbsp (seconds)</small
-                                >
-                            </label>
+                        <div class="row">
+                          <div class="col">
+                            <label><b>Trimmed Video</b></label>
                             <small class="form-text text-muted float-right"
                                 >Max length: 2 minutes</small
                             >
-                            <input
-                                name="output-length"
-                                type="number"
-                                min="1"
-                                max="120"
-                                step="1"
-                                pattern="[0-1]"
-                                oninvalid="setCustomValidity('Only values between 1 and 120 are allowed')"
-                                oninput="setCustomValidity('')"
-                                class="form-control advanced"
-                                id="output-length"
-                                value="0"
-                                maxlength="3"
-                                disabled="disabled"
-                            />
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div style="width: 100%; background-color: #cecece; border-radius: 0.25rem;">
+                                    <div id="trim-length" style="
+                                        background-color: #25d3d0aa; width: 0%; margin-left: 0%; height: 40px;
+                                        text-align: center;
+                                        vertical-align: middle;
+                                        line-height: 40px;
+                                        border-radius: 0.25rem;">
+                                        <small id="trim-length-value">0</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <small class="text-muted">0 sec</small>
+                                <small id="source-length-value" class="text-muted float-right">120 sec</small>
+                            </div>
                         </div>
 
                         <div class="row">

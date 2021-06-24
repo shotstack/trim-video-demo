@@ -346,7 +346,7 @@ function getSelectedVideoFile() {
  * @param {String} url
  */
 function setVideoDurationFromFile(url) {
-    var $clipLengthField = $('#clip-length');
+    var $sourceLengthValueField = $('#source-length-value');
     var $startField = $('#start');
     var $endField = $('#end');
 
@@ -358,13 +358,12 @@ function setVideoDurationFromFile(url) {
             maxVideoDuration = duration;
         }
 
-        $clipLengthField.val(maxVideoDuration);
-        setOutputDuration(maxVideoDuration);
+        $sourceLengthValueField.text(`${maxVideoDuration} sec`);
+        calculateTrimLength();
         $endField.val(maxVideoDuration);
         $startField.prop('disabled', false);
         $endField.prop('disabled', false);
         $endField.prop('max', Math.trunc(maxVideoDuration));
-        $clipLengthField.prop('max', maxVideoDuration);
     }).fail(function () {
         maxVideoDuration = 120;
         $clipLengthField.prop('max', maxVideoDuration);
@@ -372,13 +371,17 @@ function setVideoDurationFromFile(url) {
 }
 
 /**
- * Set duration of output.
+ * Calculate duration of output.
  *
- * @param {String} url
  */
-function setOutputDuration(value) {
-    var $outputLengthField = $('#output-length');
-    $outputLengthField.val(value);
+function calculateTrimLength() {
+    var $trimLengthValueField = $('#trim-length-value');
+    var $trimLengthField = $('#trim-length');
+    var startFieldValue = $('#start')[0].value;
+    var endFieldValue = $('#end')[0].value;
+    var trimLength = (endFieldValue > 0) ? (endFieldValue-startFieldValue) : (maxVideoDuration - startFieldValue);
+    $trimLengthValueField.text((trimLength>1) ? `${trimLength} sec`: trimLength);
+    $trimLengthField.css({width: `${trimLength*100/maxVideoDuration}%`, marginLeft: `${startFieldValue*100/maxVideoDuration}%`});
 }
 
 /**
@@ -534,13 +537,13 @@ $(document).ready(function () {
     /** Start/end change events */
     $('#start').change(function (event) {
         var newValue = parseInt(event.target.value);
-        setOutputDuration($('#end')[0].value - newValue);
+        calculateTrimLength();
         $('#end').prop('min', newValue + 1);
     });
 
     $('#end').change(function (event) {
         var newValue = parseInt(event.target.value);
-        setOutputDuration(newValue - $('#start')[0].value);
+        calculateTrimLength();
         $('#start').prop('max', parseInt(newValue - 1));
     });
 
