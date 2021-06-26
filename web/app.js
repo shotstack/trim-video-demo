@@ -359,8 +359,9 @@ function setVideoDurationFromFile(url) {
         }
 
         $sourceLengthValueField.text(`${maxVideoDuration} sec`);
-        $endField.val(maxVideoDuration);
+        $startField.val(0);
         $startField.prop('disabled', false);
+        $endField.val(maxVideoDuration);
         $endField.prop('disabled', false);
         $endField.prop('max', maxVideoDuration);
         calculateTrimLength();
