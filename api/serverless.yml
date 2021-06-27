@@ -1,0 +1,57 @@
+service: demo-pip-shotstack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: demo
+  region: ap-southeast-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: arn:aws:s3:::${env:AWS_S3_UPLOADS_BUCKET}/*
+
+package:
+  exclude:
+    - .env
+    - .env.dist
+    - package.json
+    - package-lock.json
+    - src/app.js
+    - node_modules/aws-sdk/**
+    - node_modules/**/aws-sdk/**
+
+functions:
+  shotstack:
+    handler: src/handler/shotstack/handler.submit
+    description: Demo - Render picture-in-picture
+    timeout: 15
+    memorySize: 128
+    events:
+      - http:
+          path: shotstack
+          method: post
+          cors: true
+  status:
+    handler: src/handler/shotstack/handler.status
+    description: Demo - Picture-in-picture video status check
+    timeout: 10
+    memorySize: 128
+    events:
+      - http:
+          path: shotstack/{id}
+          method: get
+          cors: true
+  upload:
+    handler: src/handler/upload/handler.getPresignedPostData
+    description: Demo - Get presigned url for asset upload
+    timeout: 15
+    memorySize: 128
+    events:
+      - http:
+          path: upload/sign
+          method: post
+          cors: true
+
+plugins:
+  - serverless-dotenv-plugin
