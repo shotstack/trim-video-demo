@@ -1,4 +1,4 @@
-//var apiUrl = 'https://1ky45v1fp9.execute-api.ap-southeast-2.amazonaws.com/demo/';
+// var apiUrl = 'https://vanhnt5aid.execute-api.ap-southeast-2.amazonaws.com/demo/';
 var apiUrl = 'http://localhost:3000/demo/';
 var apiEndpoint = apiUrl + 'shotstack';
 var urlEndpoint = apiUrl + 'upload/sign';
