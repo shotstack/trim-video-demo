@@ -1,5 +1,4 @@
-// var apiUrl = 'https://vanhnt5aid.execute-api.ap-southeast-2.amazonaws.com/demo/';
-var apiUrl = 'http://localhost:3000/demo/';
+var apiUrl = 'http://localhost:3000/demo/'; // 'https://vanhnt5aid.execute-api.ap-southeast-2.amazonaws.com/demo/';
 var apiEndpoint = apiUrl + 'shotstack';
 var urlEndpoint = apiUrl + 'upload/sign';
 var probeEndpoint = 'https://api.shotstack.io/stage/probe/';
